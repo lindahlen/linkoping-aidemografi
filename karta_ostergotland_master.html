@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_052dbc30afb7c1bf16109193cb8aff48 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+                    <style>
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+</head>
+<body>
+    
+    
+<div style="position: fixed; bottom: 50px; left: 50px; width: 250px; z-index:9999; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
+    <label for="opacity-slider" style="font-family: sans-serif; font-size: 14px;"><b>Ytornas opacitet:</b> <span id="opacity-val">50%</span></label>
+    <input type="range" id="opacity-slider" min="0" max="100" value="50" style="width: 100%; margin-top: 10px;">
+</div>
+<script>
+    var slider = document.getElementById("opacity-slider");
+    var output = document.getElementById("opacity-val");
+    
+    // Körs när man drar i reglaget
+    slider.oninput = function() {
+        output.innerHTML = this.value + "%";
+        // Letar upp alla SVG paths (polygoner och ringar) i kartan
+        var paths = document.querySelectorAll('path.leaflet-interactive');
+        paths.forEach(function(path) {
+            path.style.fillOpacity = this.value / 100;
+        }, this);
+    }
+</script>
+    
+            <div class="folium-map" id="map_052dbc30afb7c1bf16109193cb8aff48" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_052dbc30afb7c1bf16109193cb8aff48 = L.map(
+                "map_052dbc30afb7c1bf16109193cb8aff48",
+                {
+                    center: [58.4108, 15.6214],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 9,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_778204b8bdc27466dae242df649e2a88 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_778204b8bdc27466dae242df649e2a88.addTo(map_052dbc30afb7c1bf16109193cb8aff48);
+        
+    
+            var feature_group_b0e1624402bd80ad5266f2b7fd75d982 = L.featureGroup(
+                {
+}
+            );
+        
+    
+        function geo_json_61a6fdecf117cb16ab16499bcff96d83_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"color": "#3182bd", "fillColor": "#9ecae1", "fillOpacity": 0.5, "weight": 1.5};
+            }
+        }
+
+        function geo_json_61a6fdecf117cb16ab16499bcff96d83_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_61a6fdecf117cb16ab16499bcff96d83 = L.geoJson(null, {
+                onEachFeature: geo_json_61a6fdecf117cb16ab16499bcff96d83_onEachFeature,
+            
+                style: geo_json_61a6fdecf117cb16ab16499bcff96d83_styler,
+            ...{
+}
+        });
+
+        function geo_json_61a6fdecf117cb16ab16499bcff96d83_add (data) {
+            geo_json_61a6fdecf117cb16ab16499bcff96d83
+                .addData(data);
+        }
+            geo_json_61a6fdecf117cb16ab16499bcff96d83_add({"bbox": [14.537647, 57.700911, 16.903088, 59.038757], "features": [{"bbox": [14.537647, 58.073777, 14.933687, 58.353526], "geometry": {"coordinates": [[[[14.868239, 58.177985], [14.933687, 58.131115], [14.894718, 58.089863], [14.755588, 58.073777], [14.748141, 58.104872], [14.604127, 58.092495], [14.537647, 58.106135], [14.590757, 58.205145], [14.614093, 58.272564], [14.638925, 58.294765], [14.625842, 58.315305], [14.646262, 58.349764], [14.681539, 58.337715], [14.794197, 58.353526], [14.843572, 58.343681], [14.843653, 58.293106], [14.87201, 58.253056], [14.858216, 58.212847], [14.868239, 58.177985]]]], "type": "MultiPolygon"}, "id": "43", "properties": {"KnKod": "0509", "KnNamn": "\u00d6desh\u00f6g"}, "type": "Feature"}, {"bbox": [14.983107, 57.700911, 15.536465, 58.032157], "geometry": {"coordinates": [[[[15.00458, 57.895979], [14.983107, 57.934495], [15.014315, 57.97676], [15.049617, 58.000114], [15.025647, 58.032157], [15.139004, 58.022263], [15.238134, 58.009466], [15.285722, 57.977841], [15.363143, 57.975209], [15.414416, 57.961389], [15.403924, 57.896908], [15.448128, 57.897939], [15.466489, 57.873361], [15.512851, 57.868826], [15.521147, 57.844819], [15.536465, 57.796286], [15.516614, 57.761898], [15.457058, 57.767225], [15.429141, 57.747157], [15.415855, 57.700911], [15.284386, 57.715772], [15.141346, 57.707647], [15.100256, 57.758748], [15.064576, 57.825796], [15.076379, 57.850441], [15.00458, 57.895979]]]], "type": "MultiPolygon"}, "id": "44", "properties": {"KnKod": "0512", "KnNamn": "Ydre"}, "type": "Feature"}, {"bbox": [15.350851, 57.796286, 16.066764, 58.212511], "geometry": {"coordinates": [[[[15.964434, 58.125498], [16.015688, 58.111437], [15.998818, 58.087751], [15.984406, 58.035572], [16.064853, 57.972586], [16.019725, 57.953707], [16.066764, 57.864759], [16.018628, 57.861472], [15.919627, 57.813382], [15.866648, 57.832964], [15.794729, 57.81387], [15.778232, 57.845643], [15.670931, 57.864822], [15.580596, 57.853954], [15.590997, 57.824387], [15.536465, 57.796286], [15.521147, 57.844819], [15.512851, 57.868826], [15.466489, 57.873361], [15.448128, 57.897939], [15.403924, 57.896908], [15.414416, 57.961389], [15.363143, 57.975209], [15.350851, 58.044623], [15.374515, 58.070375], [15.429568, 58.094316], [15.457092, 58.080057], [15.505832, 58.100724], [15.501611, 58.128089], [15.539746, 58.162032], [15.542069, 58.203489], [15.607071, 58.188803], [15.647259, 58.170132], [15.704981, 58.199245], [15.804751, 58.212511], [15.845517, 58.201588], [15.878938, 58.168777], [15.943736, 58.15392], [15.964434, 58.125498]]]], "type": "MultiPolygon"}, "id": "45", "properties": {"KnKod": "0513", "KnNamn": "Kinda"}, "type": "Feature"}, {"bbox": [14.858216, 57.975209, 15.374515, 58.294618], "geometry": {"coordinates": [[[[14.868239, 58.177985], [14.858216, 58.212847], [14.87201, 58.253056], [14.901616, 58.275564], [14.954146, 58.281779], [14.984105, 58.294618], [15.019475, 58.283662], [15.058131, 58.288779], [15.209804, 58.246044], [15.235139, 58.172322], [15.230231, 58.1491], [15.26759, 58.137951], [15.27649, 58.110335], [15.337011, 58.106883], [15.322699, 58.087813], [15.374515, 58.070375], [15.350851, 58.044623], [15.363143, 57.975209], [15.285722, 57.977841], [15.238134, 58.009466], [15.139004, 58.022263], [15.025647, 58.032157], [14.981983, 58.117655], [14.933687, 58.131115], [14.868239, 58.177985]]]], "type": "MultiPolygon"}, "id": "46", "properties": {"KnKod": "0560", "KnNamn": "Boxholm"}, "type": "Feature"}, {"bbox": [15.779173, 58.063422, 16.432407, 58.37733], "geometry": {"coordinates": [[[[15.964434, 58.125498], [15.943736, 58.15392], [15.878938, 58.168777], [15.845517, 58.201588], [15.804751, 58.212511], [15.819184, 58.235764], [15.816417, 58.268507], [15.779173, 58.28523], [15.792032, 58.311592], [15.885557, 58.345704], [15.945186, 58.336622], [16.04736, 58.37733], [16.076145, 58.339333], [16.126407, 58.348842], [16.194357, 58.317385], [16.232783, 58.320351], [16.27997, 58.302849], [16.293647, 58.260323], [16.432407, 58.225926], [16.422321, 58.184935], [16.376429, 58.178881], [16.371983, 58.1514], [16.29372, 58.133558], [16.251843, 58.157988], [16.179033, 58.124642], [16.151266, 58.108307], [16.175504, 58.06693], [16.116801, 58.063422], [16.09208, 58.08853], [15.998818, 58.087751], [16.015688, 58.111437], [15.964434, 58.125498]]]], "type": "MultiPolygon"}, "id": "47", "properties": {"KnKod": "0561", "KnNamn": "\u00c5tvidaberg"}, "type": "Feature"}, {"bbox": [15.40809, 58.61739, 16.16703, 59.038757], "geometry": {"coordinates": [[[[15.649265, 58.667425], [15.608003, 58.61739], [15.584401, 58.640477], [15.531076, 58.618252], [15.516178, 58.644434], [15.479223, 58.644147], [15.465647, 58.681692], [15.483342, 58.745774], [15.448061, 58.758644], [15.40809, 58.813342], [15.419401, 58.830918], [15.439951, 58.876816], [15.523524, 58.875636], [15.566392, 58.911165], [15.530669, 58.944614], [15.632338, 59.003197], [15.741795, 58.980327], [15.793832, 59.038757], [15.84306, 59.024982], [15.861301, 58.998557], [15.958149, 58.96497], [16.053788, 58.941645], [16.098887, 58.897222], [16.16703, 58.85739], [16.075283, 58.828103], [16.062856, 58.790855], [15.998758, 58.754993], [15.977511, 58.709238], [15.986534, 58.688784], [15.954593, 58.670834], [15.918971, 58.622337], [15.846064, 58.635809], [15.744438, 58.659993], [15.649265, 58.667425]]]], "type": "MultiPolygon"}, "id": "48", "properties": {"KnKod": "0562", "KnNamn": "Finsp\u00e5ng"}, "type": "Feature"}, {"bbox": [16.232783, 57.982286, 16.819901, 58.397251], "geometry": {"coordinates": [[[[16.236865, 58.379853], [16.247935, 58.397251], [16.449437, 58.364268], [16.487952, 58.367176], [16.550433, 58.328627], [16.602626, 58.31789], [16.680985, 58.266121], [16.766056, 58.232552], [16.819901, 58.188976], [16.769002, 58.1236], [16.679097, 58.146045], [16.691576, 58.114391], [16.772599, 58.070786], [16.709321, 58.049754], [16.748819, 58.004152], [16.688897, 57.982286], [16.612465, 57.989284], [16.561645, 58.099602], [16.501002, 58.116323], [16.469169, 58.084025], [16.371983, 58.1514], [16.376429, 58.178881], [16.422321, 58.184935], [16.432407, 58.225926], [16.293647, 58.260323], [16.27997, 58.302849], [16.232783, 58.320351], [16.27009, 58.346941], [16.236865, 58.379853]]]], "type": "MultiPolygon"}, "id": "49", "properties": {"KnKod": "0563", "KnNamn": "Valdemarsvik"}, "type": "Feature"}, {"bbox": [15.253731, 58.070375, 16.04736, 58.657603], "geometry": {"coordinates": [[[[15.816417, 58.268507], [15.819184, 58.235764], [15.804751, 58.212511], [15.704981, 58.199245], [15.647259, 58.170132], [15.607071, 58.188803], [15.542069, 58.203489], [15.539746, 58.162032], [15.501611, 58.128089], [15.505832, 58.100724], [15.457092, 58.080057], [15.429568, 58.094316], [15.374515, 58.070375], [15.322699, 58.087813], [15.337011, 58.106883], [15.27649, 58.110335], [15.26759, 58.137951], [15.364275, 58.170403], [15.347482, 58.250915], [15.330156, 58.313375], [15.356625, 58.340791], [15.31455, 58.352218], [15.333176, 58.390929], [15.253731, 58.404454], [15.287378, 58.433289], [15.362982, 58.465176], [15.349911, 58.626811], [15.380793, 58.657603], [15.434515, 58.634662], [15.479223, 58.644147], [15.516178, 58.644434], [15.531076, 58.618252], [15.584401, 58.640477], [15.608003, 58.61739], [15.681142, 58.564264], [15.743221, 58.564184], [15.752469, 58.529266], [15.910561, 58.512467], [15.900501, 58.484123], [15.964629, 58.463915], [15.938431, 58.44018], [15.999621, 58.417703], [16.028737, 58.400222], [16.04736, 58.37733], [15.945186, 58.336622], [15.885557, 58.345704], [15.792032, 58.311592], [15.779173, 58.28523], [15.816417, 58.268507]]]], "type": "MultiPolygon"}, "id": "50", "properties": {"KnKod": "0580", "KnNamn": "Link\u00f6ping"}, "type": "Feature"}, {"bbox": [15.608003, 58.417703, 16.903088, 58.85739], "geometry": {"coordinates": [[[[15.649265, 58.667425], [15.744438, 58.659993], [15.846064, 58.635809], [15.918971, 58.622337], [15.954593, 58.670834], [15.986534, 58.688784], [15.977511, 58.709238], [15.998758, 58.754993], [16.062856, 58.790855], [16.075283, 58.828103], [16.16703, 58.85739], [16.226592, 58.849427], [16.252922, 58.82905], [16.369456, 58.709968], [16.545292, 58.705769], [16.687839, 58.680015], [16.748365, 58.632453], [16.68323, 58.635022], [16.578573, 58.645611], [16.444527, 58.663456], [16.37546, 58.664299], [16.273595, 58.672644], [16.234287, 58.653415], [16.232837, 58.619107], [16.265591, 58.611588], [16.345749, 58.628184], [16.399532, 58.593931], [16.421277, 58.639616], [16.572002, 58.63336], [16.711974, 58.59866], [16.827564, 58.550956], [16.903088, 58.509528], [16.828307, 58.4476], [16.719882, 58.427785], [16.612484, 58.438631], [16.564924, 58.441192], [16.399783, 58.483439], [16.318816, 58.490484], [16.302477, 58.522312], [16.135163, 58.52932], [16.065093, 58.510168], [16.071884, 58.466307], [16.028232, 58.456352], [15.999621, 58.417703], [15.938431, 58.44018], [15.964629, 58.463915], [15.900501, 58.484123], [15.910561, 58.512467], [15.752469, 58.529266], [15.743221, 58.564184], [15.681142, 58.564264], [15.608003, 58.61739], [15.649265, 58.667425]]]], "type": "MultiPolygon"}, "id": "51", "properties": {"KnKod": "0581", "KnNamn": "Norrk\u00f6ping"}, "type": "Feature"}, {"bbox": [15.999621, 58.266121, 16.883692, 58.52932], "geometry": {"coordinates": [[[[16.809585, 58.361869], [16.883692, 58.329582], [16.84761, 58.283138], [16.680985, 58.266121], [16.602626, 58.31789], [16.550433, 58.328627], [16.487952, 58.367176], [16.449437, 58.364268], [16.247935, 58.397251], [16.236865, 58.379853], [16.27009, 58.346941], [16.232783, 58.320351], [16.194357, 58.317385], [16.126407, 58.348842], [16.076145, 58.339333], [16.04736, 58.37733], [16.028737, 58.400222], [15.999621, 58.417703], [16.028232, 58.456352], [16.071884, 58.466307], [16.065093, 58.510168], [16.135163, 58.52932], [16.302477, 58.522312], [16.318816, 58.490484], [16.399783, 58.483439], [16.564924, 58.441192], [16.596469, 58.416141], [16.688931, 58.400886], [16.71456, 58.366536], [16.809585, 58.361869]]]], "type": "MultiPolygon"}, "id": "52", "properties": {"KnKod": "0582", "KnNamn": "S\u00f6derk\u00f6ping"}, "type": "Feature"}, {"bbox": [14.859164, 58.411686, 15.483342, 58.875002], "geometry": {"coordinates": [[[[15.085946, 58.804283], [15.134414, 58.835994], [15.186906, 58.836742], [15.2474, 58.875002], [15.33919, 58.847233], [15.38733, 58.859904], [15.419401, 58.830918], [15.40809, 58.813342], [15.448061, 58.758644], [15.483342, 58.745774], [15.465647, 58.681692], [15.479223, 58.644147], [15.434515, 58.634662], [15.380793, 58.657603], [15.349911, 58.626811], [15.362982, 58.465176], [15.287378, 58.433289], [15.232698, 58.434555], [15.246317, 58.450057], [15.116904, 58.455422], [15.102589, 58.436329], [15.068279, 58.436396], [14.99109, 58.411686], [14.979265, 58.446032], [14.986594, 58.490863], [14.96147, 58.518074], [15.024138, 58.538178], [14.98964, 58.554492], [14.929053, 58.561355], [14.859164, 58.590342], [14.926684, 58.633738], [14.939575, 58.699059], [15.028301, 58.727799], [15.049838, 58.764628], [15.085946, 58.804283]]]], "type": "MultiPolygon"}, "id": "53", "properties": {"KnKod": "0583", "KnNamn": "Motala"}, "type": "Feature"}, {"bbox": [14.646262, 58.337715, 14.99109, 58.518074], "geometry": {"coordinates": [[[[14.979265, 58.446032], [14.99109, 58.411686], [14.956419, 58.409934], [14.964485, 58.382406], [14.907916, 58.340262], [14.843572, 58.343681], [14.794197, 58.353526], [14.681539, 58.337715], [14.646262, 58.349764], [14.659822, 58.383987], [14.77262, 58.434124], [14.775678, 58.46648], [14.81898, 58.47685], [14.862218, 58.45289], [14.92363, 58.467693], [14.96147, 58.518074], [14.986594, 58.490863], [14.979265, 58.446032]]]], "type": "MultiPolygon"}, "id": "54", "properties": {"KnKod": "0584", "KnNamn": "Vadstena"}, "type": "Feature"}, {"bbox": [14.843572, 58.137951, 15.364275, 58.455422], "geometry": {"coordinates": [[[[15.209804, 58.246044], [15.058131, 58.288779], [15.019475, 58.283662], [14.984105, 58.294618], [14.954146, 58.281779], [14.901616, 58.275564], [14.87201, 58.253056], [14.843653, 58.293106], [14.843572, 58.343681], [14.907916, 58.340262], [14.964485, 58.382406], [14.956419, 58.409934], [14.99109, 58.411686], [15.068279, 58.436396], [15.102589, 58.436329], [15.116904, 58.455422], [15.246317, 58.450057], [15.232698, 58.434555], [15.287378, 58.433289], [15.253731, 58.404454], [15.333176, 58.390929], [15.31455, 58.352218], [15.356625, 58.340791], [15.330156, 58.313375], [15.347482, 58.250915], [15.364275, 58.170403], [15.26759, 58.137951], [15.230231, 58.1491], [15.235139, 58.172322], [15.209804, 58.246044]]]], "type": "MultiPolygon"}, "id": "55", "properties": {"KnKod": "0586", "KnNamn": "Mj\u00f6lby"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+    geo_json_61a6fdecf117cb16ab16499bcff96d83.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature => {
+        if (feature === null) {
+            return '';
+        } else if (typeof(feature)=='object') {
+            return JSON.stringify(feature);
+        } else {
+            return feature;
+        }
+    }
+    let fields = ["KnNamn"];
+    let aliases = ["Kommun:"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i]}</th>
+            
+            <td>${handleObject(layer.feature.properties[v])}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{
+  "sticky": true,
+  "className": "foliumtooltip",
+});
+                     
+    
+            geo_json_61a6fdecf117cb16ab16499bcff96d83.addTo(feature_group_b0e1624402bd80ad5266f2b7fd75d982);
+        
+    
+            feature_group_b0e1624402bd80ad5266f2b7fd75d982.addTo(map_052dbc30afb7c1bf16109193cb8aff48);
+        
+    
+            var feature_group_c125086118d8f34499fafa141876d900 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_fd91eca7c741c84e598cb51cac7c86f0 = L.marker(
+                [58.4108, 15.6214],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_93829e6db4ca0cf5faef4b2f28ace354 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d63486eef8d04a2abdbcf83c2cde915d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d86dec7dafdbe204612cca1f4656e762 = $(`<div id="html_d86dec7dafdbe204612cca1f4656e762" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Linköping</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Mjölby (30.6 km)<br>         2. Åtvidaberg (32.2 km)<br>         3. Finspång (34.7 km)     </div>     </div>`)[0];
+                popup_d63486eef8d04a2abdbcf83c2cde915d.setContent(html_d86dec7dafdbe204612cca1f4656e762);
+            
+        
+
+        marker_fd91eca7c741c84e598cb51cac7c86f0.bindPopup(popup_d63486eef8d04a2abdbcf83c2cde915d)
+        ;
+
+        
+    
+    
+            marker_fd91eca7c741c84e598cb51cac7c86f0.bindTooltip(
+                `<div>
+                     Linköping (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fd91eca7c741c84e598cb51cac7c86f0.setIcon(icon_93829e6db4ca0cf5faef4b2f28ace354);
+            
+    
+            var marker_8dfc2c84ba214988508a62c54cb0635a = L.marker(
+                [58.5877, 16.1924],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_ae32683fb2b134281a602496b7f6a6f5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c1023291680ea717646f9465f0349e7a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b9902dd9451bc0b24c3d16359d958e70 = $(`<div id="html_b9902dd9451bc0b24c3d16359d958e70" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Norrköping</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Söderköping (14.0 km)<br>         2. Finspång (25.2 km)<br>         3. Linköping (38.6 km)     </div>     </div>`)[0];
+                popup_c1023291680ea717646f9465f0349e7a.setContent(html_b9902dd9451bc0b24c3d16359d958e70);
+            
+        
+
+        marker_8dfc2c84ba214988508a62c54cb0635a.bindPopup(popup_c1023291680ea717646f9465f0349e7a)
+        ;
+
+        
+    
+    
+            marker_8dfc2c84ba214988508a62c54cb0635a.bindTooltip(
+                `<div>
+                     Norrköping (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8dfc2c84ba214988508a62c54cb0635a.setIcon(icon_ae32683fb2b134281a602496b7f6a6f5);
+            
+    
+            var marker_c83af0218072a0ce486d4acb3b4e4bec = L.marker(
+                [58.5371, 15.0365],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_5cced206265f4d06a5fdb5224f7e9695 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_05597d6a8745f993574bc250aa4e2311 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6bd79777415290af906806b77ce3fe0c = $(`<div id="html_6bd79777415290af906806b77ce3fe0c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Motala</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Vadstena (12.9 km)<br>         2. Mjölby (24.5 km)<br>         3. Linköping (36.8 km)     </div>     </div>`)[0];
+                popup_05597d6a8745f993574bc250aa4e2311.setContent(html_6bd79777415290af906806b77ce3fe0c);
+            
+        
+
+        marker_c83af0218072a0ce486d4acb3b4e4bec.bindPopup(popup_05597d6a8745f993574bc250aa4e2311)
+        ;
+
+        
+    
+    
+            marker_c83af0218072a0ce486d4acb3b4e4bec.bindTooltip(
+                `<div>
+                     Motala (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c83af0218072a0ce486d4acb3b4e4bec.setIcon(icon_5cced206265f4d06a5fdb5224f7e9695);
+            
+    
+            var marker_7301ddbe07366c387a6ad0ec95b241a5 = L.marker(
+                [58.322, 15.125],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_62ac59c4c90809c74a21f44005736ec5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5e82171421ac51bb971c0b9b845e7545 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_15c3bd58a175c932687e88a30ed8619e = $(`<div id="html_15c3bd58a175c932687e88a30ed8619e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Mjölby</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Boxholm (14.8 km)<br>         2. Vadstena (19.8 km)<br>         3. Motala (24.5 km)     </div>     </div>`)[0];
+                popup_5e82171421ac51bb971c0b9b845e7545.setContent(html_15c3bd58a175c932687e88a30ed8619e);
+            
+        
+
+        marker_7301ddbe07366c387a6ad0ec95b241a5.bindPopup(popup_5e82171421ac51bb971c0b9b845e7545)
+        ;
+
+        
+    
+    
+            marker_7301ddbe07366c387a6ad0ec95b241a5.bindTooltip(
+                `<div>
+                     Mjölby (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7301ddbe07366c387a6ad0ec95b241a5.setIcon(icon_62ac59c4c90809c74a21f44005736ec5);
+            
+    
+            var marker_190bb0a8bc6274eef9ea3c208dbe758f = L.marker(
+                [58.705, 15.82],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_5e796ebcc24d3b4877b9616f9877a0be = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_43b42b9be4e063ba2035683106c685dd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f2226bf790cc556b32f8d892ceb50c02 = $(`<div id="html_f2226bf790cc556b32f8d892ceb50c02" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Finspång</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Norrköping (25.2 km)<br>         2. Linköping (34.7 km)<br>         3. Söderköping (38.2 km)     </div>     </div>`)[0];
+                popup_43b42b9be4e063ba2035683106c685dd.setContent(html_f2226bf790cc556b32f8d892ceb50c02);
+            
+        
+
+        marker_190bb0a8bc6274eef9ea3c208dbe758f.bindPopup(popup_43b42b9be4e063ba2035683106c685dd)
+        ;
+
+        
+    
+    
+            marker_190bb0a8bc6274eef9ea3c208dbe758f.bindTooltip(
+                `<div>
+                     Finspång (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_190bb0a8bc6274eef9ea3c208dbe758f.setIcon(icon_5e796ebcc24d3b4877b9616f9877a0be);
+            
+    
+            var marker_b053de3055a63c716a34566ed8d79ac1 = L.marker(
+                [58.481, 16.32],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_30582c66be8201045044b17c1bbfc311 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_26ac67e6a19cda667ef31f1377a3823e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bf8fe9c6fd05560092491ebb473e21ce = $(`<div id="html_bf8fe9c6fd05560092491ebb473e21ce" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Söderköping</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Norrköping (14.0 km)<br>         2. Valdemarsvik (35.0 km)<br>         3. Åtvidaberg (36.4 km)     </div>     </div>`)[0];
+                popup_26ac67e6a19cda667ef31f1377a3823e.setContent(html_bf8fe9c6fd05560092491ebb473e21ce);
+            
+        
+
+        marker_b053de3055a63c716a34566ed8d79ac1.bindPopup(popup_26ac67e6a19cda667ef31f1377a3823e)
+        ;
+
+        
+    
+    
+            marker_b053de3055a63c716a34566ed8d79ac1.bindTooltip(
+                `<div>
+                     Söderköping (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b053de3055a63c716a34566ed8d79ac1.setIcon(icon_30582c66be8201045044b17c1bbfc311);
+            
+    
+            var marker_37075876906a8f95312b62260cc1c3dc = L.marker(
+                [58.2, 16.0],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_d252c0b7f52869811d663f38ed02e718 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dae0685b5e8d68f7228e0665f6623395 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_81b428875fa02fa6b1ffe546453cb33d = $(`<div id="html_81b428875fa02fa6b1ffe546453cb33d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Åtvidaberg</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Kinda (32.1 km)<br>         2. Linköping (32.2 km)<br>         3. Valdemarsvik (35.2 km)     </div>     </div>`)[0];
+                popup_dae0685b5e8d68f7228e0665f6623395.setContent(html_81b428875fa02fa6b1ffe546453cb33d);
+            
+        
+
+        marker_37075876906a8f95312b62260cc1c3dc.bindPopup(popup_dae0685b5e8d68f7228e0665f6623395)
+        ;
+
+        
+    
+    
+            marker_37075876906a8f95312b62260cc1c3dc.bindTooltip(
+                `<div>
+                     Åtvidaberg (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_37075876906a8f95312b62260cc1c3dc.setIcon(icon_d252c0b7f52869811d663f38ed02e718);
+            
+    
+            var marker_c7488d160f11855d0fc6f37d1cefb613 = L.marker(
+                [57.988, 15.63],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_a6b86bb8362d25d34723df100bdf715e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a30278964d73416165da5e8b0abb9065 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fc722e28d3ae08bf69c1536e9c3178ae = $(`<div id="html_fc722e28d3ae08bf69c1536e9c3178ae" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Kinda</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Ydre (26.2 km)<br>         2. Åtvidaberg (32.1 km)<br>         3. Boxholm (41.1 km)     </div>     </div>`)[0];
+                popup_a30278964d73416165da5e8b0abb9065.setContent(html_fc722e28d3ae08bf69c1536e9c3178ae);
+            
+        
+
+        marker_c7488d160f11855d0fc6f37d1cefb613.bindPopup(popup_a30278964d73416165da5e8b0abb9065)
+        ;
+
+        
+    
+    
+            marker_c7488d160f11855d0fc6f37d1cefb613.bindTooltip(
+                `<div>
+                     Kinda (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c7488d160f11855d0fc6f37d1cefb613.setIcon(icon_a6b86bb8362d25d34723df100bdf715e);
+            
+    
+            var marker_02b6ab0d2bed38f15fde655be6aca5c5 = L.marker(
+                [58.45, 14.89],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_fbaee8b05637260a5f25a6eebd3e3332 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2f8f139f6a388b09cae4847864f5901c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d4bb72996b30f12a63e7d79602877624 = $(`<div id="html_d4bb72996b30f12a63e7d79602877624" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Vadstena</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Motala (12.9 km)<br>         2. Mjölby (19.8 km)<br>         3. Ödeshög (28.2 km)     </div>     </div>`)[0];
+                popup_2f8f139f6a388b09cae4847864f5901c.setContent(html_d4bb72996b30f12a63e7d79602877624);
+            
+        
+
+        marker_02b6ab0d2bed38f15fde655be6aca5c5.bindPopup(popup_2f8f139f6a388b09cae4847864f5901c)
+        ;
+
+        
+    
+    
+            marker_02b6ab0d2bed38f15fde655be6aca5c5.bindTooltip(
+                `<div>
+                     Vadstena (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_02b6ab0d2bed38f15fde655be6aca5c5.setIcon(icon_fbaee8b05637260a5f25a6eebd3e3332);
+            
+    
+            var marker_396ce5b887cbf462aae9d4afc1508865 = L.marker(
+                [58.203, 16.6],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_9cc7860fc477a380e285c44d43d12bac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_daeba8f85fe4abb7c342b1b7d84d3c32 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5bafaf04843cc5d025be119382ec712d = $(`<div id="html_5bafaf04843cc5d025be119382ec712d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Valdemarsvik</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Söderköping (35.0 km)<br>         2. Åtvidaberg (35.2 km)<br>         3. Norrköping (48.9 km)     </div>     </div>`)[0];
+                popup_daeba8f85fe4abb7c342b1b7d84d3c32.setContent(html_5bafaf04843cc5d025be119382ec712d);
+            
+        
+
+        marker_396ce5b887cbf462aae9d4afc1508865.bindPopup(popup_daeba8f85fe4abb7c342b1b7d84d3c32)
+        ;
+
+        
+    
+    
+            marker_396ce5b887cbf462aae9d4afc1508865.bindTooltip(
+                `<div>
+                     Valdemarsvik (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_396ce5b887cbf462aae9d4afc1508865.setIcon(icon_9cc7860fc477a380e285c44d43d12bac);
+            
+    
+            var marker_7ef19e8b9103da4fec7471cae82fb2ac = L.marker(
+                [58.195, 15.05],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_c68b1dbeaf4c048802e57dd2d48351fc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_180a4400b194c689c8f720a479190ea3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_89c445c1b1f85bafd041b4847c97ea37 = $(`<div id="html_89c445c1b1f85bafd041b4847c97ea37" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Boxholm</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Mjölby (14.8 km)<br>         2. Ödeshög (23.8 km)<br>         3. Vadstena (29.9 km)     </div>     </div>`)[0];
+                popup_180a4400b194c689c8f720a479190ea3.setContent(html_89c445c1b1f85bafd041b4847c97ea37);
+            
+        
+
+        marker_7ef19e8b9103da4fec7471cae82fb2ac.bindPopup(popup_180a4400b194c689c8f720a479190ea3)
+        ;
+
+        
+    
+    
+            marker_7ef19e8b9103da4fec7471cae82fb2ac.bindTooltip(
+                `<div>
+                     Boxholm (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7ef19e8b9103da4fec7471cae82fb2ac.setIcon(icon_c68b1dbeaf4c048802e57dd2d48351fc);
+            
+    
+            var marker_bc282f832f2f5e936b62a0424818a9a5 = L.marker(
+                [58.23, 14.65],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_5b30da144a8d0da175bbd059b4770ce3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_47a7180a74fb97e7953c26f04c8dba10 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_653f644527b460ecfe44659f85be2f88 = $(`<div id="html_653f644527b460ecfe44659f85be2f88" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Ödeshög</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Boxholm (23.8 km)<br>         2. Vadstena (28.2 km)<br>         3. Mjölby (29.6 km)     </div>     </div>`)[0];
+                popup_47a7180a74fb97e7953c26f04c8dba10.setContent(html_653f644527b460ecfe44659f85be2f88);
+            
+        
+
+        marker_bc282f832f2f5e936b62a0424818a9a5.bindPopup(popup_47a7180a74fb97e7953c26f04c8dba10)
+        ;
+
+        
+    
+    
+            marker_bc282f832f2f5e936b62a0424818a9a5.bindTooltip(
+                `<div>
+                     Ödeshög (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bc282f832f2f5e936b62a0424818a9a5.setIcon(icon_5b30da144a8d0da175bbd059b4770ce3);
+            
+    
+            var marker_a396309dde94050999adf9d1e53a8ad8 = L.marker(
+                [57.828, 15.305],
+                {
+}
+            ).addTo(feature_group_c125086118d8f34499fafa141876d900);
+        
+    
+            var icon_abf572c7b53749d8425082edf2d7d8fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cdc918bd7609ad4b4ee18cdb404da857 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_19887b9ace63a87c1fcf440805ad3c7e = $(`<div id="html_19887b9ace63a87c1fcf440805ad3c7e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: sans-serif; min-width: 170px;">         <h4 style="margin-bottom: 5px; color: #333;"><b>Ydre</b></h4>         <i>Tre närmaste centralorter:</i><br>         1. Kinda (26.2 km)<br>         2. Boxholm (43.5 km)<br>         3. Mjölby (55.9 km)     </div>     </div>`)[0];
+                popup_cdc918bd7609ad4b4ee18cdb404da857.setContent(html_19887b9ace63a87c1fcf440805ad3c7e);
+            
+        
+
+        marker_a396309dde94050999adf9d1e53a8ad8.bindPopup(popup_cdc918bd7609ad4b4ee18cdb404da857)
+        ;
+
+        
+    
+    
+            marker_a396309dde94050999adf9d1e53a8ad8.bindTooltip(
+                `<div>
+                     Ydre (Klicka för avstånd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a396309dde94050999adf9d1e53a8ad8.setIcon(icon_abf572c7b53749d8425082edf2d7d8fd);
+            
+    
+            feature_group_c125086118d8f34499fafa141876d900.addTo(map_052dbc30afb7c1bf16109193cb8aff48);
+        
+    
+            var feature_group_785cb54fab82ac6f74fb98445cd10f7c = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_614e5cef04a12e3f3dbb6bd51103cc6b = L.circleMarker(
+                [58.4108, 15.6214],
+                {"bubblingMouseEvents": true, "color": "#D13438", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#D13438", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32.86208757824128, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_f31e525a4020d1a9515abb0d3cf1abef = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e9560a207da9919b7dab2ee5828ec1b3 = $(`<div id="html_e9560a207da9919b7dab2ee5828ec1b3" style="width: 100.0%; height: 100.0%;"><b>Linköping</b><br>Befolkning: 168 737</div>`)[0];
+                popup_f31e525a4020d1a9515abb0d3cf1abef.setContent(html_e9560a207da9919b7dab2ee5828ec1b3);
+            
+        
+
+        circle_marker_614e5cef04a12e3f3dbb6bd51103cc6b.bindPopup(popup_f31e525a4020d1a9515abb0d3cf1abef)
+        ;
+
+        
+    
+    
+            circle_marker_614e5cef04a12e3f3dbb6bd51103cc6b.bindTooltip(
+                `<div>
+                     Linköping (168737)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ef86de635b2fa3c7c0856d3205efba42 = L.circleMarker(
+                [58.5877, 16.1924],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 30.467504000163846, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_4c79cc45c15b13da73f7f2e6448bcc15 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0e820f307f143be049807abf04092015 = $(`<div id="html_0e820f307f143be049807abf04092015" style="width: 100.0%; height: 100.0%;"><b>Norrköping</b><br>Befolkning: 145 042</div>`)[0];
+                popup_4c79cc45c15b13da73f7f2e6448bcc15.setContent(html_0e820f307f143be049807abf04092015);
+            
+        
+
+        circle_marker_ef86de635b2fa3c7c0856d3205efba42.bindPopup(popup_4c79cc45c15b13da73f7f2e6448bcc15)
+        ;
+
+        
+    
+    
+            circle_marker_ef86de635b2fa3c7c0856d3205efba42.bindTooltip(
+                `<div>
+                     Norrköping (145042)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2820f22dab809cba0ed98c849b6cfd16 = L.circleMarker(
+                [58.5371, 15.0365],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.62287580414412, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_42c17da3aa6dc23bfd44b44f4376e57e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9738562b0e4a6c1dac4d8b6c57d6b1f7 = $(`<div id="html_9738562b0e4a6c1dac4d8b6c57d6b1f7" style="width: 100.0%; height: 100.0%;"><b>Motala</b><br>Befolkning: 43 175</div>`)[0];
+                popup_42c17da3aa6dc23bfd44b44f4376e57e.setContent(html_9738562b0e4a6c1dac4d8b6c57d6b1f7);
+            
+        
+
+        circle_marker_2820f22dab809cba0ed98c849b6cfd16.bindPopup(popup_42c17da3aa6dc23bfd44b44f4376e57e)
+        ;
+
+        
+    
+    
+            circle_marker_2820f22dab809cba0ed98c849b6cfd16.bindTooltip(
+                `<div>
+                     Motala (43175)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d750f263303ffc7c0c25d8fb86ad02f3 = L.circleMarker(
+                [58.322, 15.125],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.570084745498091, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_b3d29e8d4e0302fa8469cd2e19fe2e83 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d458fd123a4fc16aaeb02901eb40b02c = $(`<div id="html_d458fd123a4fc16aaeb02901eb40b02c" style="width: 100.0%; height: 100.0%;"><b>Mjölby</b><br>Befolkning: 28 773</div>`)[0];
+                popup_b3d29e8d4e0302fa8469cd2e19fe2e83.setContent(html_d458fd123a4fc16aaeb02901eb40b02c);
+            
+        
+
+        circle_marker_d750f263303ffc7c0c25d8fb86ad02f3.bindPopup(popup_b3d29e8d4e0302fa8469cd2e19fe2e83)
+        ;
+
+        
+    
+    
+            circle_marker_d750f263303ffc7c0c25d8fb86ad02f3.bindTooltip(
+                `<div>
+                     Mjölby (28773)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97730aea1cf3205ec9921d848f96f31d = L.circleMarker(
+                [58.705, 15.82],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.736847958459716, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_18300d26ad78051b8c0bd7e7266c1ab5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1bb168dacded72f6f79c688f4bd4487c = $(`<div id="html_1bb168dacded72f6f79c688f4bd4487c" style="width: 100.0%; height: 100.0%;"><b>Finspång</b><br>Befolkning: 21 524</div>`)[0];
+                popup_18300d26ad78051b8c0bd7e7266c1ab5.setContent(html_1bb168dacded72f6f79c688f4bd4487c);
+            
+        
+
+        circle_marker_97730aea1cf3205ec9921d848f96f31d.bindPopup(popup_18300d26ad78051b8c0bd7e7266c1ab5)
+        ;
+
+        
+    
+    
+            circle_marker_97730aea1cf3205ec9921d848f96f31d.bindTooltip(
+                `<div>
+                     Finspång (21524)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b9d0f23c67e1f09b89869563437dcef3 = L.circleMarker(
+                [58.481, 16.32],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.706739926463468, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_7bdb00f9035895de32ca7096eb680d38 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_edfe2986189e351bb7be93ce20ae36b2 = $(`<div id="html_edfe2986189e351bb7be93ce20ae36b2" style="width: 100.0%; height: 100.0%;"><b>Söderköping</b><br>Befolkning: 14 722</div>`)[0];
+                popup_7bdb00f9035895de32ca7096eb680d38.setContent(html_edfe2986189e351bb7be93ce20ae36b2);
+            
+        
+
+        circle_marker_b9d0f23c67e1f09b89869563437dcef3.bindPopup(popup_7bdb00f9035895de32ca7096eb680d38)
+        ;
+
+        
+    
+    
+            circle_marker_b9d0f23c67e1f09b89869563437dcef3.bindTooltip(
+                `<div>
+                     Söderköping (14722)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bd59f604f8cd78143053fcee9dc5112e = L.circleMarker(
+                [58.2, 16.0],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.582400596569704, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_7b90ed7af32bc6b7f6efbc801e4847d8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b8e2a7971b2606372e58f4b5c856ddf = $(`<div id="html_0b8e2a7971b2606372e58f4b5c856ddf" style="width: 100.0%; height: 100.0%;"><b>Åtvidaberg</b><br>Befolkning: 11 509</div>`)[0];
+                popup_7b90ed7af32bc6b7f6efbc801e4847d8.setContent(html_0b8e2a7971b2606372e58f4b5c856ddf);
+            
+        
+
+        circle_marker_bd59f604f8cd78143053fcee9dc5112e.bindPopup(popup_7b90ed7af32bc6b7f6efbc801e4847d8)
+        ;
+
+        
+    
+    
+            circle_marker_bd59f604f8cd78143053fcee9dc5112e.bindTooltip(
+                `<div>
+                     Åtvidaberg (11509)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f8f3d558ee4815e5dade699187a90f6 = L.circleMarker(
+                [57.988, 15.63],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.974358908401351, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_cb5458927a024640f1f8a11d7e06a0a5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_22f1ed47fed50709801903ecde744906 = $(`<div id="html_22f1ed47fed50709801903ecde744906" style="width: 100.0%; height: 100.0%;"><b>Kinda</b><br>Befolkning: 9 936</div>`)[0];
+                popup_cb5458927a024640f1f8a11d7e06a0a5.setContent(html_22f1ed47fed50709801903ecde744906);
+            
+        
+
+        circle_marker_0f8f3d558ee4815e5dade699187a90f6.bindPopup(popup_cb5458927a024640f1f8a11d7e06a0a5)
+        ;
+
+        
+    
+    
+            circle_marker_0f8f3d558ee4815e5dade699187a90f6.bindTooltip(
+                `<div>
+                     Kinda (9936)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bb3df2f05827ee2f2b25fe64e648d2ae = L.circleMarker(
+                [58.45, 14.89],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.942967665199083, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_760d2e4d790973cf1997874600faebf3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1eaa6a26c0c2801b3ec3b0b5ae9d5603 = $(`<div id="html_1eaa6a26c0c2801b3ec3b0b5ae9d5603" style="width: 100.0%; height: 100.0%;"><b>Vadstena</b><br>Befolkning: 7 532</div>`)[0];
+                popup_760d2e4d790973cf1997874600faebf3.setContent(html_1eaa6a26c0c2801b3ec3b0b5ae9d5603);
+            
+        
+
+        circle_marker_bb3df2f05827ee2f2b25fe64e648d2ae.bindPopup(popup_760d2e4d790973cf1997874600faebf3)
+        ;
+
+        
+    
+    
+            circle_marker_bb3df2f05827ee2f2b25fe64e648d2ae.bindTooltip(
+                `<div>
+                     Vadstena (7532)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f07e8ab4a28c6d44d87b55f01707cd47 = L.circleMarker(
+                [58.203, 16.6],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.936050749525987, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_aa548a32586c1cc1853c6cd8b9ba0f99 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0212599ffc1d81ae3502a5519221708f = $(`<div id="html_0212599ffc1d81ae3502a5519221708f" style="width: 100.0%; height: 100.0%;"><b>Valdemarsvik</b><br>Befolkning: 7 517</div>`)[0];
+                popup_aa548a32586c1cc1853c6cd8b9ba0f99.setContent(html_0212599ffc1d81ae3502a5519221708f);
+            
+        
+
+        circle_marker_f07e8ab4a28c6d44d87b55f01707cd47.bindPopup(popup_aa548a32586c1cc1853c6cd8b9ba0f99)
+        ;
+
+        
+    
+    
+            circle_marker_f07e8ab4a28c6d44d87b55f01707cd47.bindTooltip(
+                `<div>
+                     Valdemarsvik (7517)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5d186d30b964133e8d6157523f59da0b = L.circleMarker(
+                [58.195, 15.05],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.896168247260249, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_4c25224db64de0580c0fdd75134b2b80 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_183856cfc65ca1ba5a251ccf94fae604 = $(`<div id="html_183856cfc65ca1ba5a251ccf94fae604" style="width: 100.0%; height: 100.0%;"><b>Boxholm</b><br>Befolkning: 5 432</div>`)[0];
+                popup_4c25224db64de0580c0fdd75134b2b80.setContent(html_183856cfc65ca1ba5a251ccf94fae604);
+            
+        
+
+        circle_marker_5d186d30b964133e8d6157523f59da0b.bindPopup(popup_4c25224db64de0580c0fdd75134b2b80)
+        ;
+
+        
+    
+    
+            circle_marker_5d186d30b964133e8d6157523f59da0b.bindTooltip(
+                `<div>
+                     Boxholm (5432)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dabb567f295a1f2d814a129351b4867f = L.circleMarker(
+                [58.23, 14.65],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.789922279271114, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_270b7d93bdee039101c39aa2b480c756 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e750d808b56b4bc025925d768052af90 = $(`<div id="html_e750d808b56b4bc025925d768052af90" style="width: 100.0%; height: 100.0%;"><b>Ödeshög</b><br>Befolkning: 5 238</div>`)[0];
+                popup_270b7d93bdee039101c39aa2b480c756.setContent(html_e750d808b56b4bc025925d768052af90);
+            
+        
+
+        circle_marker_dabb567f295a1f2d814a129351b4867f.bindPopup(popup_270b7d93bdee039101c39aa2b480c756)
+        ;
+
+        
+    
+    
+            circle_marker_dabb567f295a1f2d814a129351b4867f.bindTooltip(
+                `<div>
+                     Ödeshög (5238)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c8261b40daae4233ad7d9692be14526c = L.circleMarker(
+                [57.828, 15.305],
+                {"bubblingMouseEvents": true, "color": "#0078D4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0078D4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.813314866077223, "stroke": true, "weight": 3}
+            ).addTo(feature_group_785cb54fab82ac6f74fb98445cd10f7c);
+        
+    
+        var popup_b0f3f223f3aded0192243dd0ceb01afc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ed5dea9a81b87cdd1dd45f57ddba67c1 = $(`<div id="html_ed5dea9a81b87cdd1dd45f57ddba67c1" style="width: 100.0%; height: 100.0%;"><b>Ydre</b><br>Befolkning: 3 620</div>`)[0];
+                popup_b0f3f223f3aded0192243dd0ceb01afc.setContent(html_ed5dea9a81b87cdd1dd45f57ddba67c1);
+            
+        
+
+        circle_marker_c8261b40daae4233ad7d9692be14526c.bindPopup(popup_b0f3f223f3aded0192243dd0ceb01afc)
+        ;
+
+        
+    
+    
+            circle_marker_c8261b40daae4233ad7d9692be14526c.bindTooltip(
+                `<div>
+                     Ydre (3620)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_6476d83ad98200a03b3cb61fb57688a9_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_778204b8bdc27466dae242df649e2a88,
+                },
+                overlays :  {
+                    "Kommungr\u00e4nser (Polygoner)" : feature_group_b0e1624402bd80ad5266f2b7fd75d982,
+                    "N\u00e4rmaste grannar (Pluppar)" : feature_group_c125086118d8f34499fafa141876d900,
+                    "Befolkning Q3 2025 (Ringar)" : feature_group_785cb54fab82ac6f74fb98445cd10f7c,
+                },
+            };
+            let layer_control_6476d83ad98200a03b3cb61fb57688a9 = L.control.layers(
+                layer_control_6476d83ad98200a03b3cb61fb57688a9_layers.base_layers,
+                layer_control_6476d83ad98200a03b3cb61fb57688a9_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_052dbc30afb7c1bf16109193cb8aff48);
+
+        
+</script>
+</html>
